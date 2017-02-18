@@ -29,10 +29,9 @@ private:
 		UInputComponent* InputComponent = nullptr;
 		void Grab();
 		void Release();
-
 		void FindPhysicsHandleComponent();
 		void SetupInputComponent();
-
-		//return hit for first physics body in reach
 		const FHitResult GetFirstPhysicsBodyInReach();
+		FVector GetReachLineStart();
+		FVector GetReachLineEnd();
 };
