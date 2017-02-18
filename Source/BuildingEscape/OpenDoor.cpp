@@ -28,17 +28,7 @@ void UOpenDoor::BeginPlay()
 		 }
 	
 }
-void UOpenDoor::OpenDoor()
-{
 
-	Owner->SetActorRelativeRotation(FRotator(0.0f, OpenAngle, 0.0f));
-}
-void UOpenDoor::CloseDoor()
-{
-
-	//Set the door rotation
-	Owner->SetActorRelativeRotation(FRotator(0.0f, 0.0f, 0.0f));
-}
 
 
 // Called every frame
@@ -50,16 +40,16 @@ void UOpenDoor::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompo
 	//if the actorthatopens is in the volume
 
 
-	if (GetTotalMassOfActorsOnPlate() > 30.f)
+	if (GetTotalMassOfActorsOnPlate() > TriggerMass)
 	{
-		OpenDoor();
-		LastDoorOpenTime = GetWorld()->GetTimeSeconds();
+		
+		OnOpen.Broadcast();
 	}
-	
 	//check 
-	if (GetWorld()->GetTimeSeconds() - LastDoorOpenTime > DoorCloseDelay)
+	else
+
 	{
-		CloseDoor();
+		OnClose.Broadcast();
 	}
 
 	
